@@ -13,4 +13,19 @@ class WorkoutController extends Controller
 
         return view('pages.list-workouts', ['workouts' => $workouts]);
     }
+
+    public function builder()
+    {
+        return view('pages.builder');
+    }
+
+    public function libray()
+    {
+        return view('pages.libray');
+    }
+
+    public function settings()
+    {
+        return view('pages.settings');
+    }
 }
