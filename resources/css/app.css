@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Orbitron:wght@400..900&display=swap');
+
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: "Google Sans Flex", sans-serif;
+    /* background */
+    --color-canvas: #0B0F12;
+    /* (Cards/Sidebar) */
+    --color-surface: #161B21;
+    /* Subtle hairlines separating sets, menu dividers, grid lines. */
+    --color-divider: #2F3845;
+    /* Labels, placeholders, descriptive text, target rep ranges. */
+    --color-muted-text: #64748B;
+    /* High-visibility text, workout names, heavy weight metrics. */
+    --color-primary-text: #E2E8F0;
+    /* Maximum brightness for active timers or currently logging sets. */
+    --color-high-text: #FFFFFF;
+}
