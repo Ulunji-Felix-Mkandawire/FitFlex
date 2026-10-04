@@ -14,6 +14,13 @@ class WorkoutController extends Controller
         return view('pages.list-workouts', ['workouts' => $workouts]);
     }
 
+    public function findByID(int $id)
+    {
+        $workout = Workout::findOrFail($id);
+
+        return view('pages.list-id', ['workout' => $workout]);
+    }
+
     public function builder()
     {
         return view('pages.builder');
