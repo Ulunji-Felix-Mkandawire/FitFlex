@@ -266,7 +266,7 @@
                     @endif
                     <p class="self-center text-sm">{{ $workout->performed_on }}</p>
 
-                    <a href="/workouts/{{ $workout->id }}" class="self-center text-sm">View</a>
+                    <a href="/workouts/{{ $workout->id }}" class="self-center text-blue-500 text-sm">Show</a>
                 </div>
             @endforeach
         </div>
