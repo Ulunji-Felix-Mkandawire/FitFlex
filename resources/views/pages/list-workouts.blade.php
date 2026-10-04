@@ -4,7 +4,7 @@
         <div class="py-2.5">
 
             {{-- title --}}
-            <h2 class="py-0.5">Schedule</h2>
+            <h2 class="py-0.5 font-[Orbitron]">Schedule</h2>
 
             <div class="flex gap-x-2.5 py-0.5">
                 {{-- card 1 --}}
@@ -220,34 +220,53 @@
         <div class="bg-surface border border-divider rounded-lg">
             {{-- title --}}
             <div class="px-1.5 py-2.5">
-                <h2 class="text-sm">All Workouts</h2>
+                <h2 class="font-[Orbitron] text-sm">All Workouts</h2>
             </div>
 
             <hr class="text-divider" />
 
             {{-- title columns --}}
-            <div class="gap-x-2.5 grid grid-cols-5 px-1.5 py-0.5 rounded-sm">
-                <h3 class="text-gray-500 text-sm">Name</h3>
-                <h3 class="text-gray-500 text-sm">Sets</h3>
-                <h3 class="text-gray-500 text-sm">Reps</h3>
-                <h3 class="text-gray-500 text-sm">Weight &lbrack;Kg&rbrack; </h3>
-                <h3 class="text-gray-500 text-sm">Date</h3>
+            <div class="gap-x-2.5 grid grid-cols-6 px-1.5 py-0.5 rounded-sm font-[Orbitron] text-gray-500 text-sm">
+                <h3>Name</h3>
+                <h3>Sets</h3>
+                <h3>Reps</h3>
+                <h3>Weight &lbrack;Kg&rbrack; </h3>
+                <h3>Date</h3>
+                <h3>Details</h3>
             </div>
 
             {{-- data columns --}}
             {{-- Loop here --}}
             @foreach ($workouts as $workout)
                 <hr class="text-divider" />
-                <div class="gap-x-2.5 grid grid-cols-5 px-1.5 py-2">
-                    <p class="text-sm">{{ $workout->exercise_name }}</p>
-                    <p class="text-sm">{{ $workout->sets }}</p>
-                    <p class="text-sm">{{ $workout->reps }}</p>
+                <div class="gap-x-2.5 grid grid-cols-6 px-1.5 py-2">
+
+                    {{-- only concerns first column --}}
+                    <div class="flex items-center gap-x-1.5">
+                        {{-- icon --}}
+                        <div class="bg-divider p-1.5 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 24 24">
+                                <title>gym</title>
+                                <path fill="currentColor"
+                                    d="M20.57 14.86L22 13.43L20.57 12L17 15.57L8.43 7L12 3.43L10.57 2L9.14 3.43L7.71 2L5.57 4.14L4.14 2.71L2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57L3.43 12L7 8.43L15.57 17L12 20.57L13.43 22l1.43-1.43L16.29 22l2.14-2.14l1.43 1.43l1.43-1.43l-1.43-1.43L22 16.29z" />
+                            </svg>
+                        </div>
+
+                        <p class="text-sm">{{ $workout->exercise_name }}</p>
+                        {{-- Schedule should be its own table that will have a relationship with workouts --}}
+
+                    </div>
+
+                    <p class="self-center text-sm">{{ $workout->sets }}</p>
+                    <p class="self-center text-sm">{{ $workout->reps }}</p>
                     @if ($workout->weight_kg === null)
-                        <p class="text-sm">N&sol;A</p>
+                        <p class="self-center text-sm">N&sol;A</p>
                     @else
-                        <p class="text-sm">{{ $workout->weight_kg }}</p>
+                        <p class="self-center text-sm">{{ $workout->weight_kg }}</p>
                     @endif
-                    <p class="text-sm">{{ $workout->performed_on }}</p>
+                    <p class="self-center text-sm">{{ $workout->performed_on }}</p>
+
+                    <a href="/workouts/{{ $workout->id }}" class="self-center text-sm">View</a>
                 </div>
             @endforeach
         </div>
