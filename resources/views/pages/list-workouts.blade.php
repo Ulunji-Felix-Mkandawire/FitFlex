@@ -43,7 +43,7 @@
                         <p class="text-muted-text text-xs">Monday</p>
                     </div>
                     <div class="py-1">
-                        <p class="text-muted-text text-xs cursor-pointer">View</p>
+                        <p class="text-blue-500 text-xs cursor-pointer">View</p>
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="py-1">
-                        <p class="text-muted-text text-xs cursor-pointer">View</p>
+                        <p class="text-blue-500 text-xs cursor-pointer">View</p>
                     </div>
                 </div>
 
@@ -125,7 +125,7 @@
                     </div>
 
                     <div class="py-1">
-                        <p class="text-muted-text text-xs cursor-pointer">View</p>
+                        <p class="text-blue-500 text-xs cursor-pointer">View</p>
                     </div>
                 </div>
 
@@ -166,7 +166,7 @@
                     </div>
 
                     <div class="py-1">
-                        <p class="text-muted-text text-xs cursor-pointer">View</p>
+                        <p class="text-blue-500 text-xs cursor-pointer">View</p>
                     </div>
                 </div>
 
@@ -208,7 +208,7 @@
                     </div>
 
                     <div class="py-1">
-                        <p class="text-muted-text text-xs cursor-pointer">View</p>
+                        <p class="text-blue-500 text-xs cursor-pointer">View</p>
                     </div>
                 </div>
 
@@ -219,8 +219,39 @@
         {{-- Show all workouts --}}
         <div class="bg-surface border border-divider rounded-lg">
             {{-- title --}}
-            <div class="px-1.5 py-2.5">
-                <h2 class="font-[Orbitron] text-sm">All Workouts</h2>
+            <div class="justify-between items-center grid grid-cols-6 px-1.5 py-2.5">
+                <div class="">
+                    <h2 class="font-[Orbitron] text-sm">All Workouts</h2>
+                </div>
+
+                {{-- Filter --}}
+                <div class="col-start-6">
+                    <form class="text-muted-text text-sm" action="{{ route('dashboard') }}" method="GET">
+                        @csrf
+                        <div>
+
+                            {{-- <button type="submit" class="text-blue-500">Show</button> --}}
+
+                            <select name="filter" id="filter"
+                                class="bg-surface px-1.5 py-0.5 border border-divider rounded-lg outline-0 w-full"
+                                onchange="this.form.submit()">
+
+                                <option value="">Filter</option>
+                                <option value="All">All</option>
+
+                                @foreach ($workouts as $workout)
+                                    <option value="{{ $workout->exercise_name }}"
+                                        {{ request('filter') === $workout->exercise_name ? 'selected' : '' }}>
+                                        {{ $workout->exercise_name }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+                    </form>
+                </div>
+
             </div>
 
             <hr class="text-divider" />
