@@ -7,11 +7,21 @@ use Illuminate\Http\Request;
 
 class WorkoutController extends Controller
 {
-    public function listWorkouts()
+    public function listWorkouts(Request $request)
     {
-        $workouts = Workout::OrderBy('created_at', 'desc')->get();
+        if(!$request->filter || $request->filter === "All")
+            {
+                $workouts = Workout::OrderBy('created_at', 'desc')->get(); 
 
-        return view('pages.list-workouts', ['workouts' => $workouts]);
+                return view('pages.list-workouts', ['workouts' => $workouts]);
+            }
+        
+        else
+            {
+                $workouts = Workout::where('exercise_name', $request->filter)->get();
+                
+                return view('pages.list-workouts', ['workouts' => $workouts]);
+            }
     }
 
     public function findByID(int $id)
