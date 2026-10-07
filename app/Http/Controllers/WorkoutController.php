@@ -19,7 +19,7 @@ class WorkoutController extends Controller
         else
             {
                 $workouts = Workout::where('exercise_name', $request->filter)->get();
-                
+
                 return view('pages.list-workouts', ['workouts' => $workouts]);
             }
     }
@@ -29,6 +29,21 @@ class WorkoutController extends Controller
         $workout = Workout::findOrFail($id);
 
         return view('pages.list-id', ['workout' => $workout]);
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'exercise_name' => ['required', 'string', 'min:3', 'max:50'],
+            'sets' => ['required', 'integer', 'min:1'],
+            'reps' => ['required', 'integer', 'min:1'],
+            'weight_kg' => ['nullable', 'integer'],
+            'performed_on' => ['required', 'date'],
+        ]);
+        
+        Workout::create($validated);
+
+        return redirect('/');
     }
 
     public function builder()
