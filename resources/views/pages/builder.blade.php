@@ -32,12 +32,24 @@
                     </div>
                     <div class="">
                         <input type="date" name="performed_on" placeholder="Date"
-                            class="px-2.5 py-1 border border-divider rounded-lg outline-0 w-full text-primary-text text-sm"
+                            class="px-2.5 py-1 border border-divider rounded-lg outline-0 w-full text-gray-400 text-sm"
                             value="{{ old('performed_on') }}" />
+                    </div>
+                    {{-- Plan --}}
+                    <div class="">
+                        <select name="workout_plan_id"
+                            class="bg-surface px-1.5 py-0.5 border border-divider rounded-lg outline-0 w-full text-gray-400 text-sm cursor-pointer">
+                            <option value="" disabled selected hidden>Select Workout Plan</option>
+                            @foreach ($workoutPlans as $workoutPlan)
+                                <option value="{{ $workoutPlan->id }}">
+                                    <p>{{ $workoutPlan->name }}</p>
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="text-center">
                         <button
-                            class="px-5 py-1.5 border border-divider rounded-lg text-blue-500 text-sm">Create</button>
+                            class="px-5 py-1.5 border border-divider rounded-lg text-blue-500 text-sm cursor-pointer">Create</button>
                     </div>
                 </div>
             </form>
