@@ -11,6 +11,7 @@ class Workout extends Model
         'sets',
         'reps',
         'weight_kg',
-        'performed_on'
+        'performed_on',
+        'workout_plan_id'
     ];
 }
