@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Workout;
+use App\Models\WorkoutPlan;
 use Illuminate\Http\Request;
 
 class WorkoutController extends Controller
@@ -48,7 +49,9 @@ class WorkoutController extends Controller
 
     public function builder()
     {
-        return view('pages.builder');
+        $workoutPlans = WorkoutPlan::all();
+
+        return view('pages.builder', ['workoutPlans' => $workoutPlans]);
     }
 
     public function libray()
