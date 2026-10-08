@@ -236,7 +236,7 @@
                                 class="bg-surface px-1.5 py-0.5 border border-divider rounded-lg outline-0 w-full cursor-pointer"
                                 onchange="this.form.submit()">
 
-                                <option value="">Filter</option>
+                                <option value="" disabled selected hidden>Filter</option>
                                 <option value="All">All</option>
 
                                 @foreach ($workouts as $workout)
