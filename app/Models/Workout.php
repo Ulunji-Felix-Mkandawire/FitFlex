@@ -14,4 +14,9 @@ class Workout extends Model
         'performed_on',
         'workout_plan_id'
     ];
+
+    public function workoutPlan()
+    {
+        return $this->belongsTo(WorkoutPlan::class);
+    }
 }
