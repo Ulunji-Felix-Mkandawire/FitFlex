@@ -27,7 +27,7 @@ class WorkoutController extends Controller
 
     public function findByID(int $id)
     {
-        $workout = Workout::findOrFail($id);
+        $workout = Workout::with('WorkoutPlan')->findOrFail($id);
 
         return view('pages.list-id', ['workout' => $workout]);
     }
