@@ -12,7 +12,7 @@ class WorkoutController extends Controller
     {
         if(!$request->filter || $request->filter === "All")
             {
-                $workouts = Workout::OrderBy('created_at', 'desc')->get(); 
+                $workouts = Workout::with('WorkoutPlan')->OrderBy('created_at', 'desc')->get(); 
 
                 return view('pages.list-workouts', ['workouts' => $workouts]);
             }
@@ -40,6 +40,7 @@ class WorkoutController extends Controller
             'reps' => ['required', 'integer', 'min:1'],
             'weight_kg' => ['nullable', 'integer'],
             'performed_on' => ['required', 'date'],
+            'workout_plan_id' => ['nullable', 'integer']
         ]);
         
         Workout::create($validated);

@@ -269,11 +269,12 @@
             <hr class="text-divider" />
 
             {{-- title columns --}}
-            <div class="gap-x-2.5 grid grid-cols-6 px-1.5 py-0.5 rounded-sm font-[Orbitron] text-gray-500 text-sm">
+            <div class="gap-x-2.5 grid grid-cols-7 px-1.5 py-0.5 rounded-sm font-[Orbitron] text-gray-500 text-sm">
                 <h3>Name</h3>
                 <h3>Sets</h3>
                 <h3>Reps</h3>
                 <h3>Weight &lbrack;Kg&rbrack; </h3>
+                <h3>Plan</h3>
                 <h3>Date</h3>
                 <h3>Details</h3>
             </div>
@@ -282,7 +283,7 @@
             {{-- Loop here --}}
             @foreach ($workouts as $workout)
                 <hr class="text-divider" />
-                <div class="gap-x-2.5 grid grid-cols-6 px-1.5 py-2">
+                <div class="gap-x-2.5 grid grid-cols-7 px-1.5 py-2">
 
                     {{-- only concerns first column --}}
                     <div class="flex items-center gap-x-1.5">
@@ -307,8 +308,18 @@
                     @else
                         <p class="self-center text-sm">{{ $workout->weight_kg }}</p>
                     @endif
+
+                    {{-- Col 6 --}}
+
+                    @if ($workout->workout_plan_id !== null)
+                        <p class="self-center text-sm">{{ $workout->WorkoutPlan->name }}</p>
+                    @else
+                        <p class="self-center text-sm">N&sol;A</p>
+                    @endif
+
                     <p class="self-center text-sm">{{ $workout->performed_on }}</p>
 
+                    {{-- col 7 --}}
                     <a href="/workouts/{{ $workout->id }}" class="self-center text-blue-500 text-sm">Show</a>
                 </div>
             @endforeach
