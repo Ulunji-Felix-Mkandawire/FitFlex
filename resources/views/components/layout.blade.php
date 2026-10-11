@@ -33,17 +33,17 @@
                 <a href="{{ route('builder') }}"
                     class="{{ request()->is('builder') ? 'text-primary-text' : 'text-gray-700' }}">Builder</a>
 
-                <a href="{{ route('libray') }}"
-                    class="{{ request()->is('libray') ? 'text-primary-text' : 'text-gray-700' }}">Library</a>
+                <a href="{{ route('library') }}"
+                    class="{{ request()->is('library') ? 'text-primary-text' : 'text-gray-700' }}">Library</a>
 
                 <a href="{{ route('settings') }}"
                     class="{{ request()->is('settings') ? 'text-primary-text' : 'text-gray-700' }}">Settings</a>
 
             </nav>
             {{-- extras: profile --}}
-            <div class="flex items-center gap-x-2.5">
+            {{-- <div class="flex items-center gap-x-2.5">
                 <form>
-                    @csrf
+
                     <div class="flex items-center bg-surface rounded-2xl w-50">
 
                         <div class="pl-2">
@@ -63,7 +63,7 @@
                 <div class="bg-gray-500 rounded-full size-6">
                     <img src="" class="" />
                 </div>
-            </div>
+            </div> --}}
         </header>
         {{ $slot }}
     </body>

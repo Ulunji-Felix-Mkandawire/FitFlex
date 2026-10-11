@@ -12,14 +12,14 @@ class WorkoutController extends Controller
     {
         if(!$request->filter || $request->filter === "All")
             {
-                $workouts = Workout::with('WorkoutPlan')->OrderBy('created_at', 'desc')->get(); 
+                $workouts = Workout::with('workoutPlan')->OrderBy('created_at', 'desc')->paginate(4); 
 
                 return view('pages.list-workouts', ['workouts' => $workouts]);
             }
         
         else
             {
-                $workouts = Workout::where('exercise_name', $request->filter)->get();
+                $workouts = Workout::with('workoutPlan')->where('exercise_name', $request->filter)->get();
 
                 return view('pages.list-workouts', ['workouts' => $workouts]);
             }
@@ -27,7 +27,7 @@ class WorkoutController extends Controller
 
     public function findByID(int $id)
     {
-        $workout = Workout::with('WorkoutPlan')->findOrFail($id);
+        $workout = Workout::with('workoutPlan')->findOrFail($id);
 
         return view('pages.list-id', ['workout' => $workout]);
     }
@@ -38,14 +38,14 @@ class WorkoutController extends Controller
             'exercise_name' => ['required', 'string', 'min:3', 'max:50'],
             'sets' => ['required', 'integer', 'min:1'],
             'reps' => ['required', 'integer', 'min:1'],
-            'weight_kg' => ['nullable', 'integer'],
+            'weight_kg' => ['nullable', 'numeric', 'min:0', 'max:999.99'],
             'performed_on' => ['required', 'date'],
-            'workout_plan_id' => ['nullable', 'integer']
+            'workout_plan_id' => ['nullable', 'exists:workout_plans,id']
         ]);
         
         Workout::create($validated);
 
-        return redirect('/');
+        return redirect()->route('dashboard')->with('success', 'Workout added');
     }
 
     public function builder()
@@ -55,9 +55,9 @@ class WorkoutController extends Controller
         return view('pages.builder', ['workoutPlans' => $workoutPlans]);
     }
 
-    public function libray()
+    public function library()
     {
-        return view('pages.libray');
+        return view('pages.library');
     }
 
     public function settings()

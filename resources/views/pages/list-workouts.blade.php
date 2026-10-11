@@ -1,5 +1,9 @@
 <x-layout>
     <div class="px-32 text-primary-text">
+        {{-- success --}}
+        @if (session('success'))
+            <p class="mb-2 text-green-500 text-sm">{{ session('success') }}</p>
+        @endif
         {{-- schedules --}}
         <div class="py-2.5">
 
@@ -227,7 +231,7 @@
                 {{-- Filter --}}
                 <div class="flex items-center gap-x-1.5 col-start-6">
                     <form class="w-40 text-muted-text text-sm" action="{{ route('dashboard') }}" method="GET">
-                        @csrf
+
                         <div class="">
 
                             {{-- <button type="submit" class="text-blue-500">Show</button> --}}
@@ -237,14 +241,18 @@
                                 onchange="this.form.submit()">
 
                                 <option value="" disabled selected hidden>Filter</option>
-                                <option value="All">All</option>
 
-                                @foreach ($workouts as $workout)
+                                <option value="All">All</option>
+                                <option value="Bench Press">Bench Press</option>
+                                <option value="Shoulder raises">Shoulder raises</option>
+                                <option value="Chest Flies">Chest Flies</option>
+
+                                {{-- @foreach ($workouts as $workout)
                                     <option value="{{ $workout->exercise_name }}"
                                         {{ request('filter') === $workout->exercise_name ? 'selected' : '' }}>
                                         {{ $workout->exercise_name }}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
 
                             </select>
 
@@ -311,18 +319,24 @@
 
                     {{-- Col 6 --}}
 
-                    @if ($workout->workout_plan_id !== null)
-                        <p class="self-center text-sm">{{ $workout->WorkoutPlan->name }}</p>
+                    {{-- @if ($workout->workout_plan_id !== null)
+                        <p class="self-center text-sm">{{ $workout->workoutPlan->name }}</p>
                     @else
                         <p class="self-center text-sm">N&sol;A</p>
-                    @endif
+                    @endif --}}
 
-                    <p class="self-center text-sm">{{ $workout->performed_on }}</p>
+                    <p class="self-center text-sm">{{ $workout->workoutPlan?->name ?? 'N/A' }}</p>
+
+                    <p class="self-center text-sm">{{ $workout->performed_on->format('M j, Y') }}</p>
 
                     {{-- col 7 --}}
                     <a href="/workouts/{{ $workout->id }}" class="self-center text-blue-500 text-sm">Show</a>
                 </div>
             @endforeach
+
+        </div>
+        <div class="mt-2.5">
+            {{ $workouts->links() }}
         </div>
     </div>
 </x-layout>

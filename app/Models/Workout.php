@@ -15,6 +15,14 @@ class Workout extends Model
         'workout_plan_id'
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'performed_on' => 'date',
+            'weight_kg' => 'decimal:2',
+        ];
+    }
+
     public function workoutPlan()
     {
         return $this->belongsTo(WorkoutPlan::class);

@@ -9,7 +9,7 @@ Route::get('/workouts/{id}', [WorkoutController::class, 'findById']);
 
 Route::get('/builder', [WorkoutController::class, 'builder'])->name('builder');
 
-Route::get('/libray', [WorkoutController::class, 'libray'])->name('libray');
+Route::view('/library', 'pages.library')->name('library');
 
 Route::get('/settings', [WorkoutController::class, 'settings'])->name('settings');
 

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('workouts', function (Blueprint $table) {
             $table->id();
             $table->string('exercise_name');
-            // $table->string('exercise_type');
             $table->integer('sets');
             $table->integer('reps');
             $table->decimal('weight_kg', 5, 2)->nullable();
