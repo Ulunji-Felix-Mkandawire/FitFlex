@@ -65,6 +65,12 @@
                 </div>
             </div> --}}
         </header>
+        {{-- Messages --}}
+        @if (session('success'))
+            <div class="px-32 py-2.5">
+                <p class="text-green-500 text-sm">{{ session('success') }}</p>
+            </div>
+        @endif
         {{ $slot }}
     </body>
 

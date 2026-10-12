@@ -1,9 +1,5 @@
 <x-layout>
     <div class="px-32 text-primary-text">
-        {{-- success --}}
-        @if (session('success'))
-            <p class="mb-2 text-green-500 text-sm">{{ session('success') }}</p>
-        @endif
         {{-- schedules --}}
         <div class="py-2.5">
 
