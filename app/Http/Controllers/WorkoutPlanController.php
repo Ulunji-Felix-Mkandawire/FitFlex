@@ -13,7 +13,9 @@ class WorkoutPlanController extends Controller
      */
     public function index()
     {
-        //
+        $plans = WorkoutPlan::OrderBy('created_at', 'desc')->get();
+
+        return view('pages.plans.index', ['plans' => $plans]);
     }
 
     /**
@@ -21,7 +23,7 @@ class WorkoutPlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.plans.create');
     }
 
     /**
@@ -30,6 +32,8 @@ class WorkoutPlanController extends Controller
     public function store(StoreWorkoutPlanRequest $request)
     {
         WorkoutPlan::create($request->validated());
+
+        return redirect()->route('plans.index')->with('success', 'Workout Plan Added');
     }
 
     /**

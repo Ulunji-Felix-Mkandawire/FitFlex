@@ -33,8 +33,8 @@
                 <a href="{{ route('builder') }}"
                     class="{{ request()->is('builder') ? 'text-primary-text' : 'text-gray-700' }}">Builder</a>
 
-                <a href="{{ route('library') }}"
-                    class="{{ request()->is('library') ? 'text-primary-text' : 'text-gray-700' }}">Library</a>
+                <a href="{{ route('plans.index') }}"
+                    class="{{ request()->is('plans.index') ? 'text-primary-text' : 'text-gray-700' }}">Plan</a>
 
                 <a href="{{ route('settings') }}"
                     class="{{ request()->is('settings') ? 'text-primary-text' : 'text-gray-700' }}">Settings</a>
