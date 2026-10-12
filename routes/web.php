@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\WorkoutController;
+use App\Http\Controllers\WorkoutPlanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WorkoutController::class, 'listWorkouts'])->name('dashboard');
@@ -14,3 +15,5 @@ Route::view('/library', 'pages.library')->name('library');
 Route::get('/settings', [WorkoutController::class, 'settings'])->name('settings');
 
 Route::post('/store', [WorkoutController::class, 'store'])->name('store');
+
+Route::resource('plans', WorkoutPlanController::class)->only(['index', 'create', 'store']);
