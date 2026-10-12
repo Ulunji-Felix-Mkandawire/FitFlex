@@ -22,9 +22,10 @@
         <hr class="text-divider" />
 
         {{-- title columns --}}
-        <div class="gap-x-2.5 grid grid-cols-3 px-1.5 py-0.5 rounded-sm font-[Orbitron] text-gray-500 text-sm">
+        <div class="gap-x-2.5 grid grid-cols-4 px-1.5 py-0.5 rounded-sm font-[Orbitron] text-gray-500 text-sm">
             <h3>Name</h3>
             <h3>Description</h3>
+            <h3>Workouts</h3>
             <h3>Details</h3>
         </div>
 
@@ -32,7 +33,7 @@
         {{-- Loop here --}}
         @foreach ($plans as $plan)
             <hr class="text-divider" />
-            <div class="gap-x-2.5 grid grid-cols-3 px-1.5 py-2">
+            <div class="gap-x-2.5 grid grid-cols-4 px-1.5 py-2">
 
                 {{-- only concerns first column --}}
                 <div class="flex items-center gap-x-1.5">
@@ -51,14 +52,16 @@
 
                 <p class="self-center text-sm">{{ $plan->description }}</p>
 
+                <p class="self-center text-sm">{{ $plan->workouts_count }}</p>
+
                 {{-- col 7 --}}
                 <a href="/plans/{{ $plan->id }}" class="self-center text-blue-500 text-sm">Show</a>
             </div>
         @endforeach
 
     </div>
-    {{-- <div class="mt-2.5">
-            {{ $plans->links() }}
-        </div> --}}
+    <div class="mt-2.5 px-32">
+        {{ $plans->links() }}
+    </div>
     </div>
 </x-layout>

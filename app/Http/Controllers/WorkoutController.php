@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreWorkoutRequest;
 use App\Models\Workout;
 use App\Models\WorkoutPlan;
 use Illuminate\Http\Request;
@@ -32,18 +33,18 @@ class WorkoutController extends Controller
         return view('pages.list-id', ['workout' => $workout]);
     }
 
-    public function store(Request $request)
+    public function store(StoreWorkoutRequest $request)
     {
-        $validated = $request->validate([
-            'exercise_name' => ['required', 'string', 'min:3', 'max:50'],
-            'sets' => ['required', 'integer', 'min:1'],
-            'reps' => ['required', 'integer', 'min:1'],
-            'weight_kg' => ['nullable', 'numeric', 'min:0', 'max:999.99'],
-            'performed_on' => ['required', 'date'],
-            'workout_plan_id' => ['nullable', 'exists:workout_plans,id']
-        ]);
+        // $validated = $request->validate([
+        //     'exercise_name' => ['required', 'string', 'min:3', 'max:50'],
+        //     'sets' => ['required', 'integer', 'min:1'],
+        //     'reps' => ['required', 'integer', 'min:1'],
+        //     'weight_kg' => ['nullable', 'numeric', 'min:0', 'max:999.99'],
+        //     'performed_on' => ['required', 'date'],
+        //     'workout_plan_id' => ['nullable', 'exists:workout_plans,id']
+        // ]);
         
-        Workout::create($validated);
+        Workout::create($request->validated());
 
         return redirect()->route('dashboard')->with('success', 'Workout added');
     }
