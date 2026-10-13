@@ -10,10 +10,6 @@ Route::get('/workouts/{id}', [WorkoutController::class, 'findById']);
 
 Route::get('/builder', [WorkoutController::class, 'builder'])->name('builder');
 
-Route::view('/library', 'pages.library')->name('library');
-
-Route::get('/settings', [WorkoutController::class, 'settings'])->name('settings');
-
 Route::post('/store', [WorkoutController::class, 'store'])->name('store');
 
 Route::resource('plans', WorkoutPlanController::class)->only(['index', 'create', 'store']);

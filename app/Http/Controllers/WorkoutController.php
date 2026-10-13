@@ -11,20 +11,21 @@ class WorkoutController extends Controller
 {
     public function listWorkouts(Request $request)
     {
-        if(!$request->filter || $request->filter === "All")
-            {
-                $workouts = Workout::with('workoutPlan')->OrderBy('created_at', 'desc')->paginate(4); 
+        $workouts = Workout::with('workoutPlan')
+            ->when(
+                $request->filled('filter') && $request->filter !== 'All',
+                fn ($query) => $query->where('exercise_name', $request->filter)
+            )
+            ->latest()
+            ->paginate(4)
+            ->withQueryString();
 
-                return view('pages.list-workouts', ['workouts' => $workouts]);
-            }
-        
-        else
-            {
-                $workouts = Workout::with('workoutPlan')->where('exercise_name', $request->filter)->get();
+        $exerciseNames = Workout::distinct()->orderBy('exercise_name')->pluck('exercise_name');
 
-                return view('pages.list-workouts', ['workouts' => $workouts]);
-            }
+        return view('pages.list-workouts', compact('workouts', 'exerciseNames'));
     }
+
+
 
     public function findByID(int $id)
     {
@@ -35,15 +36,6 @@ class WorkoutController extends Controller
 
     public function store(StoreWorkoutRequest $request)
     {
-        // $validated = $request->validate([
-        //     'exercise_name' => ['required', 'string', 'min:3', 'max:50'],
-        //     'sets' => ['required', 'integer', 'min:1'],
-        //     'reps' => ['required', 'integer', 'min:1'],
-        //     'weight_kg' => ['nullable', 'numeric', 'min:0', 'max:999.99'],
-        //     'performed_on' => ['required', 'date'],
-        //     'workout_plan_id' => ['nullable', 'exists:workout_plans,id']
-        // ]);
-        
         Workout::create($request->validated());
 
         return redirect()->route('dashboard')->with('success', 'Workout added');
@@ -54,15 +46,5 @@ class WorkoutController extends Controller
         $workoutPlans = WorkoutPlan::all();
 
         return view('pages.builder', ['workoutPlans' => $workoutPlans]);
-    }
-
-    public function library()
-    {
-        return view('pages.library');
-    }
-
-    public function settings()
-    {
-        return view('pages.settings');
     }
 }

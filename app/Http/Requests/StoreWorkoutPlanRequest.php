@@ -23,7 +23,7 @@ class StoreWorkoutPlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:0', 'max:50', 'unique:workout_plans,name'],
+            'name' => ['required', 'string', 'min:3', 'max:50', 'unique:workout_plans,name'],
             'description' => ['nullable', 'string', 'max:255']
         ];
     }

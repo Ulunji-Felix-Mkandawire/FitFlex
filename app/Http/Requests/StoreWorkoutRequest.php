@@ -26,7 +26,7 @@ class StoreWorkoutRequest extends FormRequest
             'exercise_name' => ['required', 'string', 'min:3', 'max:50'],
             'sets' => ['required', 'integer', 'min:1'],
             'reps' => ['required', 'integer', 'min:1'],
-            'weight_kg' => ['nullable', 'numeric', 'min:0', 'max:999.999'],
+            'weight_kg' => ['nullable', 'numeric', 'min:0', 'max:999.99'],
             'performed_on' => ['required', 'date'],
             'workout_plan_id' => ['nullable', 'exists:workout_plans,id'],
         ];

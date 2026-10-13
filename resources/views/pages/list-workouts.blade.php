@@ -236,20 +236,11 @@
                                 class="bg-surface px-1.5 py-0.5 border border-divider rounded-lg outline-0 w-full cursor-pointer"
                                 onchange="this.form.submit()">
 
-                                <option value="" disabled selected hidden>Filter</option>
-
-                                <option value="All">All</option>
-                                <option value="Bench Press">Bench Press</option>
-                                <option value="Shoulder raises">Shoulder raises</option>
-                                <option value="Chest Flies">Chest Flies</option>
-
-                                {{-- @foreach ($workouts as $workout)
-                                    <option value="{{ $workout->exercise_name }}"
-                                        {{ request('filter') === $workout->exercise_name ? 'selected' : '' }}>
-                                        {{ $workout->exercise_name }}
-                                    </option>
-                                @endforeach --}}
-
+                                <option value="All" @selected(request('filter') === 'All')>All</option>
+                                @foreach ($exerciseNames as $name)
+                                    <option value="{{ $name }}" @selected(request('filter') === $name)>
+                                        {{ $name }}</option>
+                                @endforeach
                             </select>
 
                         </div>
@@ -301,7 +292,6 @@
                         </div>
 
                         <p class="text-sm">{{ $workout->exercise_name }}</p>
-                        {{-- Schedule should be its own table that will have a relationship with workouts --}}
 
                     </div>
 
@@ -312,14 +302,6 @@
                     @else
                         <p class="self-center text-sm">{{ $workout->weight_kg }}</p>
                     @endif
-
-                    {{-- Col 6 --}}
-
-                    {{-- @if ($workout->workout_plan_id !== null)
-                        <p class="self-center text-sm">{{ $workout->workoutPlan->name }}</p>
-                    @else
-                        <p class="self-center text-sm">N&sol;A</p>
-                    @endif --}}
 
                     <p class="self-center text-sm">{{ $workout->workoutPlan?->name ?? 'N/A' }}</p>
 

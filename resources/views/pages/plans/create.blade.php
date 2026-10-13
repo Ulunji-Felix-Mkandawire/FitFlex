@@ -23,9 +23,9 @@
                     <div class="">
                         <input type="text" name="description" placeholder="Description"
                             class="px-2.5 py-1 border border-divider rounded-lg outline-0 w-full text-primary-text text-sm"
-                            min="1" value="{{ old('description') }}" />
+                            value="{{ old('description') }}" />
 
-                        @error('sets')
+                        @error('description')
                             <p class="mt-0.5 text-red-500 text-xs">{{ $message }}</p>
                         @enderror
                     </div>
