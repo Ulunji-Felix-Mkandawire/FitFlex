@@ -35,5 +35,14 @@ class WorkoutPlanController extends Controller
         return redirect()->route('plans.index')->with('success', 'Workout Plan Added');
     }
 
-    
+    /**
+     * Display the specified workout plan.
+     */
+    public function show(WorkoutPlan $plan)
+    {
+        $plan->load('workouts');
+        
+        return view('pages.plans.show', ['plan' => $plan]);
+    }
+
 }

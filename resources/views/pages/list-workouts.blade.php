@@ -308,7 +308,8 @@
                     <p class="self-center text-sm">{{ $workout->performed_on->format('M j, Y') }}</p>
 
                     {{-- col 7 --}}
-                    <a href="/workouts/{{ $workout->id }}" class="self-center text-blue-500 text-sm">Show</a>
+                    <a href="{{ route('workouts.show', $workout) }}"
+                        class="self-center text-blue-500 text-sm">Show</a>
                 </div>
             @endforeach
 

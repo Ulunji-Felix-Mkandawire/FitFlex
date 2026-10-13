@@ -7,7 +7,8 @@
         <div class="flex gap-2.5">
             <div class="flex flex-col flex-1 gap-y-2.5 bg-surface my-2.5 p-2.5 border border-divider rounded-lg">
 
-                <p class="self-center text-sm">Plan: {{ $workout->workoutPlan?->name ?? '-' }} </p>
+                <a href="{{ route('plans.index') }}" class="self-center text-sm">Plan:
+                    {{ $workout->workoutPlan?->name ?? '-' }} </a>
                 <p class="self-center text-sm">Description: <span
                         class="text-muted-text">{{ $workout->workoutPlan?->description ?? '-' }}</span></p>
             </div>
