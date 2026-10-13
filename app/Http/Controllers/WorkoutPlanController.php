@@ -12,7 +12,7 @@ class WorkoutPlanController extends Controller
      */
     public function index()
     {
-        $plans = WorkoutPlan::withCount('workouts')->orderBy('name')->paginate(5);
+        $plans = WorkoutPlan::withCount('workouts')->orderBy('performed_on')->paginate(5);
 
         return view('pages.plans.index', ['plans' => $plans]);
     }
