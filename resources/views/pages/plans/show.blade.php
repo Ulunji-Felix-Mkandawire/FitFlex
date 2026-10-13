@@ -7,7 +7,7 @@
         <div class="">
             <div class="flex flex-col flex-1 gap-y-2.5 bg-surface my-2.5 p-2.5 border border-divider rounded-lg">
 
-                <p class="self-center text-sm">Plan: {{ $plan?->name ?? '-' }} </p>
+                <p class="self-center text-sm">Plan: {{ $plan->name }} </p>
                 <p class="self-center text-sm">Description: <span
                         class="text-muted-text">{{ $plan?->description ?? '-' }}</span></p>
             </div>
@@ -35,7 +35,7 @@
 
                 {{-- data columns --}}
                 {{-- Loop here --}}
-                @forelse ($plan->workouts as $workout)
+                @forelse ($workouts as $workout)
                     <hr class="text-divider" />
                     <div class="gap-x-2.5 grid grid-cols-6 px-1.5 py-2">
 

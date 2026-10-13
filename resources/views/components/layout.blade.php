@@ -20,10 +20,10 @@
     <body class="bg-canvas text-primary-text">
         <header class="flex justify-between items-center px-32 py-2.5 border-b border-b-surface text-sm">
             {{-- logo & app name --}}
-            <div class="flex items-center gap-x-1">
+            <a href="{{ route('dashboard') }}" class="flex items-center gap-x-1">
                 <img src="{{ asset('images/FitFlexPlus.png') }}" alt="FitFlex Logo" class="size-8" />
                 <h3 class="font-[Orbitron] font-medium text-primary-text">FitFlex</h3>
-            </div>
+            </a>
             {{-- links --}}
             <nav class="flex gap-x-2.5">
 

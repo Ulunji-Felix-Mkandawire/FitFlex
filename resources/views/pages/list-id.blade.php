@@ -6,9 +6,13 @@
 
         <div class="flex gap-2.5">
             <div class="flex flex-col flex-1 gap-y-2.5 bg-surface my-2.5 p-2.5 border border-divider rounded-lg">
-
-                <a href="{{ route('plans.index') }}" class="self-center text-sm">Plan:
-                    {{ $workout->workoutPlan?->name ?? '-' }} </a>
+                @if ($workout->workoutPlan)
+                    <a href="{{ route('plans.show', $workout->workoutPlan) }}" class="text-blue-500 text-sm">
+                        Plan: {{ $workout->workoutPlan->name }}
+                    </a>
+                @else
+                    <p class="text-sm">Plan: -</p>
+                @endif
                 <p class="self-center text-sm">Description: <span
                         class="text-muted-text">{{ $workout->workoutPlan?->description ?? '-' }}</span></p>
             </div>
@@ -23,8 +27,8 @@
                 </div>
 
                 <div>
-                    <p class="self-center text-sm">Repeatitons: <span
-                            class="text-muted-text">{{ $workout->reps }}</span></p>
+                    <p class="self-center text-sm">Repetitons: <span class="text-muted-text">{{ $workout->reps }}</span>
+                    </p>
                 </div>
 
                 @if ($workout->weight_kg === null)

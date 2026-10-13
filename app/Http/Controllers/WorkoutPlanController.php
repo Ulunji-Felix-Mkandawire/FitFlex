@@ -40,9 +40,10 @@ class WorkoutPlanController extends Controller
      */
     public function show(WorkoutPlan $plan)
     {
-        $plan->load('workouts');
+
+        $workouts = $plan->workouts()->latest('performed_on')->get();
         
-        return view('pages.plans.show', ['plan' => $plan]);
+        return view('pages.plans.show', compact('plan', 'workouts'));
     }
 
 }
