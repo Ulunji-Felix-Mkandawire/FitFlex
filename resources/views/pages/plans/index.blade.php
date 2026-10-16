@@ -4,7 +4,7 @@
         {{-- Show all plans --}}
         <div class="bg-surface my-2.5 border border-divider rounded-lg">
             {{-- title --}}
-            <div class="flex justify-between items-center px-1.5 py-1">
+            <div class="flex justify-between items-center px-4 py-3">
                 <div class="">
                     <h2 class="font-[Orbitron] text-sm">All Plans</h2>
                 </div>

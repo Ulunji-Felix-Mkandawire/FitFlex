@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Exercise;
 use App\Models\User;
 use App\Models\Workout;
 use App\Models\WorkoutPlan;
@@ -29,8 +30,25 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Pull Day', 'description' => 'Back, biceps'],
             ['name' => 'Leg Day', 'description' => 'Quads, hamstrings, glutes, calves'],
             ['name' => 'Full Body', 'description' => null],
-        ])->map( fn($plan) => WorkoutPlan::create($plan) );
+        ])->map(fn ($plan) => WorkoutPlan::create($plan));
 
-        Workout::factory()->count(40)->state( fn () => ['workout_plan_id' => fake()->boolean(85) ? $plans->random()->id : null, ])->create();
+        $exercises = collect([
+            ['name' => 'Bench Press', 'muscle_group' => 'Chest', 'equipment' => 'Barbell'],
+            ['name' => 'Squat', 'muscle_group' => 'Legs', 'equipment' => 'Barbell'],
+            ['name' => 'Deadlift', 'muscle_group' => 'Back', 'equipment' => 'Barbell'],
+            ['name' => 'Overhead Press', 'muscle_group' => 'Shoulders', 'equipment' => 'Barbell'],
+            ['name' => 'Barbell Row', 'muscle_group' => 'Back', 'equipment' => 'Barbell'],
+            ['name' => 'Pull-up', 'muscle_group' => 'Back', 'equipment' => null],
+            ['name' => 'Lat Pulldown', 'muscle_group' => 'Back', 'equipment' => 'Cable machine'],
+            ['name' => 'Romanian Deadlift', 'muscle_group' => 'Legs', 'equipment' => 'Barbell'],
+        ])->map(fn ($exercise) => Exercise::create($exercise));
+
+        Workout::factory()
+            ->count(40)
+            ->state(fn () => [
+                'exercise_id' => $exercises->random()->id,
+                'workout_plan_id' => fake()->boolean(85) ? $plans->random()->id : null,
+            ])
+            ->create();
     }
 }

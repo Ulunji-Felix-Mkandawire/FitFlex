@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Workout extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'exercise_name',
+        'exercise_id',
         'sets',
         'reps',
         'weight_kg',
         'performed_on',
-        'workout_plan_id'
+        'workout_plan_id',
     ];
 
     protected function casts(): array
@@ -29,5 +29,10 @@ class Workout extends Model
     public function workoutPlan()
     {
         return $this->belongsTo(WorkoutPlan::class);
+    }
+
+    public function exercise()
+    {
+        return $this->belongsTo(Exercise::class);
     }
 }

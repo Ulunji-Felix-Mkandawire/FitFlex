@@ -24,7 +24,7 @@ class StoreWorkoutPlanRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:50', 'unique:workout_plans,name'],
-            'description' => ['nullable', 'string', 'max:255']
+            'description' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

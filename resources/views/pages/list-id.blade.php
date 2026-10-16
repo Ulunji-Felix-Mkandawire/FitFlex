@@ -13,12 +13,11 @@
                 @else
                     <p class="text-sm">Plan: -</p>
                 @endif
-                <p class="self-center text-sm">Description: <span
-                        class="text-muted-text">{{ $workout->workoutPlan?->description ?? '-' }}</span></p>
             </div>
             <div class="flex flex-col flex-1 gap-y-2.5 bg-surface my-2.5 p-2.5 border border-divider rounded-lg">
                 <div>
-                    <p class="text-sm">Exercise Name: <span class="text-muted-text">{{ $workout->exercise_name }}</span>
+                    <p class="text-sm">Exercise Name:
+                        <span class="text-muted-text">{{ $workout->exercise->name }}</span>
                     </p>
                 </div>
 

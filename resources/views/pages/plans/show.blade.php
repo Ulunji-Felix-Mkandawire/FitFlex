@@ -7,9 +7,10 @@
         <div class="">
             <div class="flex flex-col flex-1 gap-y-2.5 bg-surface my-2.5 p-2.5 border border-divider rounded-lg">
 
-                <p class="self-center text-sm">Plan: {{ $plan->name }} </p>
-                <p class="self-center text-sm">Description: <span
-                        class="text-muted-text">{{ $plan?->description ?? '-' }}</span></p>
+                <p class="self-center text-sm">Plan: {{ $plan->name }}</p>
+                <p class="self-center text-sm">Description:
+                    <span class="text-muted-text">{{ $plan->description ?? '-' }}</span>
+                </p>
             </div>
 
             {{-- Show all workouts for this plan --}}
@@ -50,7 +51,7 @@
                                 </svg>
                             </div>
 
-                            <p class="text-sm">{{ $workout->exercise_name }}</p>
+                            <p class="text-sm">{{ $workout->exercise->name }}</p>
 
                         </div>
 

@@ -23,12 +23,20 @@ class StoreWorkoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'exercise_name' => ['required', 'string', 'min:3', 'max:50'],
+            'exercise_id' => ['required', 'exists:exercises,id'],
             'sets' => ['required', 'integer', 'min:1'],
             'reps' => ['required', 'integer', 'min:1'],
             'weight_kg' => ['nullable', 'numeric', 'min:0', 'max:999.99'],
             'performed_on' => ['required', 'date'],
             'workout_plan_id' => ['nullable', 'exists:workout_plans,id'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'exercise_id' => 'exercise',
+            'workout_plan_id' => 'plan',
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreWorkoutRequest;
+use App\Models\Exercise;
 use App\Models\Workout;
 use App\Models\WorkoutPlan;
 use Illuminate\Http\Request;
@@ -11,25 +12,24 @@ class WorkoutController extends Controller
 {
     public function listWorkouts(Request $request)
     {
-        $workouts = Workout::with('workoutPlan')
+        $workouts = Workout::with(['workoutPlan', 'exercise'])
             ->when(
                 $request->filled('filter') && $request->filter !== 'All',
-                fn ($query) => $query->where('exercise_name', $request->filter)
+                fn ($query) => $query->where('exercise_id', $request->filter)
             )
-            ->latest()
+            ->latest('performed_on')
+            ->latest('id')
             ->paginate(4)
             ->withQueryString();
 
-        $exerciseNames = Workout::distinct()->orderBy('exercise_name')->pluck('exercise_name');
+        $exercises = Exercise::orderBy('name')->get();
 
-        return view('pages.list-workouts', compact('workouts', 'exerciseNames'));
+        return view('pages.list-workouts', compact('workouts', 'exercises'));
     }
-
-
 
     public function show(Workout $workout)
     {
-        $workout->load('workoutPlan');
+        $workout->load(['workoutPlan', 'exercise']);
 
         return view('pages.list-id', ['workout' => $workout]);
     }
@@ -43,8 +43,9 @@ class WorkoutController extends Controller
 
     public function builder()
     {
-        $workoutPlans = WorkoutPlan::all();
-
-        return view('pages.builder', ['workoutPlans' => $workoutPlans]);
+        return view('pages.builder', [
+            'exercises' => Exercise::orderBy('name')->get(),
+            'workoutPlans' => WorkoutPlan::orderBy('name')->get(),
+        ]);
     }
 }
