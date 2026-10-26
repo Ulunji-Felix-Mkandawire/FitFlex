@@ -15,4 +15,12 @@ class WorkoutPlan extends Model
     {
         return $this->hasMany(Workout::class);
     }
+
+    public function exercises()
+    {
+        return $this->belongsToMany(Exercise::class)
+            ->withPivot(['target_sets', 'target_reps', 'position'])
+            ->withTimestamps()
+            ->orderByPivot('position');
+    }
 }

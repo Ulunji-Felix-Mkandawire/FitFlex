@@ -21,4 +21,9 @@ class Exercise extends Model
     {
         return $this->hasMany(Workout::class);
     }
+
+    public function workoutPlans()
+    {
+        return $this->belongsToMany(WorkoutPlan::class);
+    }
 }

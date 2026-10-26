@@ -43,6 +43,25 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Romanian Deadlift', 'muscle_group' => 'Legs', 'equipment' => 'Barbell'],
         ])->map(fn ($exercise) => Exercise::create($exercise));
 
+
+        $ex = fn (string $name) => $exercises->firstWhere('name', $name)->id;
+
+        $plans[0]->exercises()->attach([
+            $ex('Bench Press')    => ['target_sets' => 4, 'target_reps' => 8,  'position' => 1],
+            $ex('Overhead Press') => ['target_sets' => 3, 'target_reps' => 10, 'position' => 2],
+        ]);
+        
+        $plans[1]->exercises()->attach([
+            $ex('Deadlift')    => ['target_sets' => 4, 'target_reps' => 8,  'position' => 1],
+            $ex('Lat Pulldown') => ['target_sets' => 3, 'target_reps' => 10, 'position' => 2],
+        ]);
+        
+        $plans[2]->exercises()->attach([
+            $ex('Squat')    => ['target_sets' => 4, 'target_reps' => 8,  'position' => 1],
+            $ex('Romanian Deadlift') => ['target_sets' => 3, 'target_reps' => 10, 'position' => 2],
+        ]);
+
+
         Workout::factory()
             ->count(40)
             ->state(fn () => [
